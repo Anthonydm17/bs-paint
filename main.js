@@ -35,22 +35,57 @@ while (count <= gridWidth * gridWidth) {
 // THEN add an event listener function for what happens when one is clicked.
 // THEN wire those two together, so that when the palette elements are clicked,
 // the function runs.
-//
-// And proceed from there to getting the squares working.
-//
-
-// ALSO.
-// You do not have to follow the sections below. If you're doing your functions inline, it doesn't make a lot of sense to separate the event listener functions from their wiring!
-
-/***********
- * QUERIES *
-***********/
-
-// Add queries for all your squares, palette colors, and brush here.
-// (Note the singular or plural used in that sentence!)
 
 
+let colorPalette = document.querySelectorAll(".palette div");
+console.log(colorPalette);
 
+// brush color selector
+let brushColor = document.querySelector(".current-brush");
+
+
+for (let color of colorPalette) {
+  color.addEventListener("click", function () {
+    console.log("colorPalette clicked")
+    brushColor.classList.replace(brushColor.classList[1], color.classList[1]);
+  })
+}
+
+
+
+let clicked = false;
+
+let mouseUp = document.addEventListener("mouseup", function () {
+  clicked = false;
+})
+
+let mouseDown = document.addEventListener("mousedown", function () {
+  clicked = true;
+})
+
+
+
+
+let canvas = document.querySelectorAll(".canvas div");
+
+
+for (let square of canvas) {
+
+  square.addEventListener("click", function () {
+    square.classList.replace(square.classList[1], brushColor.classList[1]);
+    
+  })
+
+
+  square.addEventListener("mouseenter", function () {
+    
+    if (clicked === true) {
+
+      square.classList.replace(square.classList[1], brushColor.classList[1]);
+    }
+  })
+}
+  
 /****************************
  * EVENT LISTENER FUNCTIONS *
 ****************************/
@@ -70,4 +105,4 @@ while (count <= gridWidth * gridWidth) {
 // Now: wiring up our event listeners to our html node elements.
 // You'll need to add the appropriate event listener for each
 // square and for each palette color from the functions you
-// wrote above.
+// wrote above
